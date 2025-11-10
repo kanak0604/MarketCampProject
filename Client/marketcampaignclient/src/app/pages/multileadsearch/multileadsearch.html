@@ -1,0 +1,88 @@
+<div class="search-container">
+  <div class="search-input-section">
+    <h2> Multi-Lead Search</h2>
+    
+    <div class="input-section">
+      <textarea
+        [(ngModel)]="inputText"
+        placeholder="Enter Lead IDs or Emails (one per line, max 500)..."
+      ></textarea>
+
+      <div class="btn-group">
+        <button class="search-btn" (click)="search()">Search</button>
+        <button class="clear-btn" (click)="clear()">Clear</button>
+      </div>
+    </div>
+
+    <div class="loading" *ngIf="loading">⏳ Searching leads...</div>
+
+    <div class="error" *ngIf="error">{{ error }}</div>
+  </div>
+
+  <div class="results-section" *ngIf="result">
+    <div class="summary">
+      <h3>Summary</h3>
+      <p>Total Requested: {{ result.summary.totalRequested }}</p>
+      <p>Found: {{ result.summary.foundCount }}</p>
+      <p>Not Found: {{ result.summary.notFoundCount }}</p>
+      <p>Invalid Inputs: {{ result.summary.invalidInputs }}</p>
+    </div>
+
+    <div *ngIf="result.invalidInputs.length > 0" class="invalid">
+      <h3> Invalid Inputs</h3>
+      <ul>
+        <li *ngFor="let inv of result.invalidInputs">{{ inv }}</li>
+      </ul>
+    </div>
+
+    <div *ngIf="result.notFound.length > 0" class="notfound">
+      <h3> Not Found Leads</h3>
+      <ul>
+        <li *ngFor="let nf of result.notFound">{{ nf }}</li>
+      </ul>
+    </div>
+
+    <div *ngIf="result.found.length > 0" class="found-section">
+      <h3> Found Leads ({{ result.found.length }})</h3>
+
+      <div class="export-btn">
+        <button (click)="exportCSV()">⬇ Export Found Leads (CSV)</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Lead ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Campaign</th>
+              <th>Segment</th>
+              <th>Open Rate</th>
+              <th>CTR</th>
+              <th>Conversion Rate</th>
+              <th>Has Opened</th>
+              <th>Has Converted</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let l of result.found">
+              <td>{{ l.leadID }}</td>
+              <td>{{ l.name }}</td>
+              <td>{{ l.email }}</td>
+              <td>{{ l.phoneNumber }}</td>
+              <td>{{ l.campaignName }}</td>
+              <td>{{ l.segment }}</td>
+              <td>{{ l.openRate }}%</td>
+              <td>{{ l.clicks }}%</td>
+              <td>{{ l.conversions }}%</td>
+              <td>{{ l.hasOpenedEmail ? 'YES' : 'NO' }}</td>
+              <td>{{ l.hasConverted ? 'YES' : 'NO' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

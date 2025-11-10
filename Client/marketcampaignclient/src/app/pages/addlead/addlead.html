@@ -1,0 +1,111 @@
+<div class="box">
+  <div class="add-lead-container">
+    <div class="header">
+      <h2>➕ Add New Lead</h2>
+      <button class="back-btn" (click)="cancel()">← Back to Dashboard</button>
+    </div>
+
+    <div class="form-card">
+      <form (ngSubmit)="addLead()" class="lead-form">
+        <div class="form-grid">
+          <input type="text" placeholder="Lead ID" [(ngModel)]="newLead.leadID" name="leadID" class="form-input" />
+          <input type="text" placeholder="Name *" [(ngModel)]="newLead.name" name="name" required class="form-input" />
+          <input type="email" placeholder="Email *" [(ngModel)]="newLead.email" name="email" required class="form-input" />
+          <input type="text" placeholder="Phone Number (+91XXXXXXXXXX)" [(ngModel)]="newLead.phoneNumber" name="phoneNumber" class="form-input" />
+
+          <select [(ngModel)]="newLead.campaignAssignment" name="campaignAssignment" class="form-select">
+            <option value="">Select Campaign</option>
+            <option *ngFor="let c of campaigns" [value]="c.campaignName">{{ c.campaignName }}</option>
+          </select>
+
+          <input type="text" placeholder="Segment (auto-filled)" [(ngModel)]="newLead.segment" name="segment" class="form-input" readonly />
+        </div>
+
+        <div class="checkbox-row">
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="newLead.hasOpenedEmail" name="hasOpenedEmail" />
+            <span>Has Opened Email</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="newLead.hasConverted" name="hasConverted" />
+            <span>Has Converted</span>
+          </label>
+        </div>
+
+        <button type="submit" class="add-btn">Add Lead</button>
+      </form>
+    </div>
+
+    <div class="table-card">
+      <h3>📋 Existing Leads ({{ leads.length }})</h3>
+      <div class="table-container" *ngIf="leads.length; else noLeads">
+        <table class="leads-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Campaign</th>
+              <th>Segment</th>
+              <th>Opened</th>
+              <th>Converted</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let l of leads">
+              <td>{{ l.leadID }}</td>
+              <td>{{ l.name }}</td>
+              <td>{{ l.email }}</td>
+              <td>{{ l.phoneNumber }}</td>
+              <td>{{ l.campaignName }}</td> 
+              <td>{{ l.segment }}</td>
+              <td><span class="status-badge" [class.success]="l.hasOpenedEmail">{{ l.hasOpenedEmail ? '✅' : '❌' }}</span></td>
+              <td><span class="status-badge" [class.success]="l.hasConverted">{{ l.hasConverted ? '✅' : '❌' }}</span></td>
+              <td>
+                <button class="edit-btn" (click)="openUpdateModal(l)"> Edit</button>
+                <button class="delete-btn" (click)="deleteLead(l.leadID)"> Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #noLeads>
+        <div class="no-leads">
+          <p>📭 No leads added yet.</p>
+          <small>Add your first lead using the form above</small>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="modal-overlay" *ngIf="showModal">
+      <div class="modal-bar">
+        <div class="modal-content">
+          <h3>✏️ Update Lead</h3>
+          <input type="text" [(ngModel)]="updatedLead.name" placeholder="Name" />
+          <input type="email" [(ngModel)]="updatedLead.email" placeholder="Email" />
+          <input type="text" [(ngModel)]="updatedLead.phoneNumber" placeholder="Phone Number (+91...)" />
+          <select [(ngModel)]="updatedLead.campaignAssignment">
+            <option value="">Select Campaign</option>
+            <option *ngFor="let c of campaigns" [value]="c.campaignName">{{ c.campaignName }}</option>
+          </select>
+          <input type="text" [(ngModel)]="updatedLead.segment" placeholder="Segment" readonly />
+
+          <label>
+            <input type="checkbox" [(ngModel)]="updatedLead.hasOpenedEmail" /> Has Opened Email
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="updatedLead.hasConverted" /> Has Converted
+          </label>
+
+          <div class="modal-actions">
+            <button class="save-btn" (click)="saveUpdatedLead()">💾 Save</button>
+            <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

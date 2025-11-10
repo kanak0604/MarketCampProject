@@ -1,0 +1,56 @@
+<div class="bulk-upload-container">
+  <h1>📤 Bulk Lead Upload</h1>
+  <div class="file-input-container">
+  <input type="file" (change)="onFileSelect($event)" accept=".csv" />
+  </div>
+  <div *ngIf="parsedLeads.length > 0">
+    <h3>Preview ({{ validLeads.length }} valid / {{ invalidLeads.length }} invalid)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Campaign</th>
+          <th>Segment</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lead of paginatedLeads; let i = index"
+            [ngClass]="lead.Errors.length > 0 ? 'invalid-row' : 'valid-row'">
+          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>{{ lead.Name }}</td>
+          <td>{{ lead.Email }}</td>
+          <td>{{ lead.PhoneNumber }}</td>
+          <td>{{ lead.CampaignName }}</td>
+          <td>{{ lead.Segment }}</td>
+          <td>
+            <span *ngIf="lead.Errors.length === 0">✅ Valid</span>
+            <span *ngIf="lead.Errors.length > 0">❌ {{ lead.Errors.join(', ') }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">⬅ Prev</button>
+      <span>Page {{ currentPage }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= parsedLeads.length">Next ➡</button>
+    </div>
+
+    <button (click)="uploadValidLeads()" [disabled]="validLeads.length === 0">Display Summary</button>
+  </div>
+
+  <div *ngIf="uploadSummary" class="summary-section">
+    <h3>Display Summary</h3>
+    <ul>
+      <li><strong>Processed:</strong> {{ uploadSummary.processed }}</li>
+      <li><strong>Updated:</strong> {{ uploadSummary.updated }}</li>
+      <li><strong>Rejected:</strong> {{ uploadSummary.rejected }}</li>
+      <li><strong>Total:</strong> {{ uploadSummary.total }}</li>
+    </ul>
+  </div>
+</div>

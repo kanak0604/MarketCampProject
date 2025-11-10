@@ -1,0 +1,177 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <h2>Market Campaign</h2>
+    <div class="timer">
+      <span>⏳ Session: {{ countdown }}s</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a routerLink="/addlead">Add Lead</a></li>
+        <li><a routerLink="/bulkupload">Bulk Upload</a></li>
+        <li><a routerLink="/multileadsearch">Multi Lead Search</a></li>
+        <li><a routerLink="/analytics">Analytics</a></li>
+        <li><a routerLink="/login">Logout</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <h1 class="dashboard-title">Campaign Dashboard</h1>
+
+    <div class="top-controls">
+<section class="filter-section">
+  <h3>Filter Campaigns</h3>
+  <div class="filters">
+    <input type="text" placeholder="Campaign Name" [(ngModel)]="filters.campaignName" />
+    <input type="date" [(ngModel)]="filters.startDate" />
+    <input type="date" [(ngModel)]="filters.endDate" />
+    <select [(ngModel)]="filters.status">
+      <option value="">Select Status</option>
+      <option value="Active">Active</option>
+      <option value="Completed">Completed</option>
+      <option value="Pending">Pending</option>
+    </select>
+    <select [(ngModel)]="filters.agency">
+      <option value="">Select Agency</option>
+      <option value="A">Agency A</option>
+      <option value="B">Agency B</option>
+      <option value="C">Agency C</option>
+    </select>
+    <select [(ngModel)]="filters.buyer">
+      <option value="">Select Buyer</option>
+      <option value="A">Buyer A</option>
+      <option value="B">Buyer B</option>
+      <option value="C">Buyer C</option>
+    </select>
+    <select [(ngModel)]="filters.brand">
+      <option value="">Select Brand</option>
+      <option value="A">Brand A</option>
+      <option value="B">Brand B</option>
+      <option value="C">Brand C</option>
+    </select>
+    <div class="filter-btns">
+      <button type="button" class="search-btn" (click)="applyFilters()">🔍 Search</button>
+      <button type="button" class="clear-btn" (click)="clearFilters()">🧹 Clear</button>
+    </div>
+  </div>
+</section>
+
+
+      <div class="add-campaign-container">
+        <h2>➕ Add New Campaign</h2>
+
+        <form (ngSubmit)="addCampaign()" class="campaign-form">
+          <div class="form-row">
+            <input type="text" placeholder="Campaign Name *" [(ngModel)]="newCampaign.campaignName" name="campaignName" required />
+            <input type="date" placeholder="Start Date *" [(ngModel)]="newCampaign.startDate" name="startDate" required />
+            <input type="date" placeholder="End Date *" [(ngModel)]="newCampaign.endDate" name="endDate" required />
+          </div>
+
+          <div class="form-row">
+            <select [(ngModel)]="newCampaign.agency" name="agency" required>
+              <option value="">Select Agency</option>
+              <option value="A">Agency A</option>
+              <option value="B">Agency B</option>
+              <option value="C">Agency C</option>
+            </select>
+
+            <select [(ngModel)]="newCampaign.buyer" name="buyer" required>
+              <option value="">Select Buyer</option>
+              <option value="A">Buyer A</option>
+              <option value="B">Buyer B</option>
+              <option value="C">Buyer C</option>
+            </select>
+
+            <select [(ngModel)]="newCampaign.brand" name="brand" required>
+              <option value="">Select Brand</option>
+              <option value="A">Brand A</option>
+              <option value="B">Brand B</option>
+              <option value="C">Brand C</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <select [(ngModel)]="newCampaign.status" name="status">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+
+          <div class="button-row">
+            <button type="submit" class="add-btn">Add Campaign</button>
+            <button type="button" class="cancel-btn" (click)="cancel()">Back to Dashboard</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <section class="table-section">
+      <h3>All Campaigns</h3>
+      <div class="table-wrapper" *ngIf="paginatedCampaigns && paginatedCampaigns.length; else noData">
+        <table>
+          <thead>
+            <tr>
+              <th (click)="sortBy('campaignName')">Campaign Name</th>
+              <th (click)="sortBy('startDate')">Start Date</th>
+              <th (click)="sortBy('endDate')">End Date</th>
+              <th (click)="sortBy('totalLeads')">Total Leads</th>
+              <th (click)="sortBy('openRate')">Open Rate</th>
+              <th (click)="sortBy('conversionRate')">Conversion Rate</th>
+              <th (click)="sortBy('clickThroughRate')">Click Through Rate</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of paginatedCampaigns">
+              <td>{{ c.campaignName }}</td>
+              <td>{{ c.startDate | date:'mediumDate' }}</td>
+              <td>{{ c.endDate | date:'mediumDate' }}</td>
+              <td>{{ c.totalLeads }}</td>
+              <td>{{ c.openRate }}%</td>
+              <td>{{ c.conversionRate }}%</td>
+              <td>{{ c.clickThroughRate }}%</td>
+              <td>{{ c.status }}</td>
+              <td>
+                <button class="edit-btn" (click)="openUpdateModal(c)">✏️</button>
+                <button class="delete-btn" (click)="deleteCampaign(c.campaignId)">🗑️</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #noData>
+        <div class="no-data">No campaigns found for the selected filters.</div>
+      </ng-template>
+
+      <div class="pagination">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">⬅ Prev</button>
+        <span>Page {{ currentPage }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= filteredCampaigns.length">Next ➡</button>
+      </div>
+
+      <div class="export-container">
+        <button class="export-btn" (click)="exportCSV()">⬇ Export Campaign Analytics (CSV)</button>
+      </div>
+    </section>
+
+    <div class="modal-overlay" *ngIf="showModal">
+      <div class="modal-bar">
+        <div class="modal-content">
+          <input type="text" [(ngModel)]="updatedCampaign.campaignName" placeholder="Campaign Name" />
+          <input type="date" [(ngModel)]="updatedCampaign.startDate" />
+          <input type="date" [(ngModel)]="updatedCampaign.endDate" />
+          <select [(ngModel)]="updatedCampaign.status">
+            <option value="Active">Active</option>
+            <option value="Completed">Completed</option>
+            <option value="Pending">Pending</option>
+          </select>
+          <button class="save-btn" (click)="saveUpdatedCampaign()">💾 Save</button>
+          <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

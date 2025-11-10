@@ -1,0 +1,152 @@
+.search-container {
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  color: #3e2723;
+  max-width: 1000px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+.search-input-section {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 15px;
+}
+.results-section {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 10px;
+}
+h2 {
+  color: #4e342e;
+  margin-bottom: 15px;
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.search-btn,
+.clear-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.search-btn {
+  background: #795548;
+  color: #fff;
+}
+
+.search-btn:hover {
+  background: #5d4037;
+}
+
+.clear-btn {
+  background: #d7ccc8;
+  color: #3e2723;
+}
+
+.clear-btn:hover {
+  background: #bcaaa4;
+}
+
+.loading {
+  margin-top: 15px;
+  color: #6d4c41;
+  font-weight: 500;
+}
+
+.error {
+  color: #b71c1c;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.summary {
+  background: #f3e5f5;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 15px 0;
+}
+
+.invalid,
+.notfound {
+  background: #ffebee;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+.found-section {
+  background: #f1f8e9;
+  padding: 15px;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+
+.export-btn {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.export-btn button {
+  background: #6d4c41;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.export-btn button:hover {
+  background: #5d4037;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+th,
+td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+th {
+  background: #efebe9;
+  color: #3e2723;
+  font-weight: 600;
+}

@@ -1,0 +1,386 @@
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  height: 450px;
+  background-color: #3e2723;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+/* Left section */
+.left-section {
+  flex: 1;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  color: white;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.2);
+}
+
+.brand-content {
+  max-width: 400px;
+  text-align: center;
+}
+
+.app-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.app-title .highlight {
+  color: #f5deb3;
+}
+
+.tagline {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+}
+
+/* Right section */
+.right-section {
+  flex: 1;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #faf9f7;
+}
+
+.card {
+  background: white;
+  padding: 1.8rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 40px rgba(139, 69, 19, 0.15);
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #654321;
+  margin-bottom: 0.4rem;
+}
+
+.subtitle {
+  color: #8b7355;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Form styles */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #654321;
+  margin-bottom: 0.4rem;
+}
+
+.form-input {
+  padding: 0.8rem;
+  border: 2px solid #d2b48c;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #8b4513;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+.form-input.error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.error-message {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: #dc2626;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+  color: white;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.8rem;
+  width: 100%;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(139, 69, 19, 0.3);
+  background: linear-gradient(135deg, #654321 0%, #8b4513 100%);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  background: #d2b48c;
+}
+
+/* Message styles */
+.message-container {
+  margin: 1.2rem 0;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.alert.success {
+  background: #f0f9f0;
+  color: #2d5016;
+  border: 1px solid #c6f6d5;
+}
+
+.alert.error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.alert-icon {
+  font-weight: bold;
+}
+
+/* Divider */
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 1.2rem 0;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #d2b48c;
+}
+
+.divider span {
+  background: white;
+  padding: 0 1rem;
+  color: #8b7355;
+  font-size: 0.85rem;
+}
+
+/* Register section */
+.register-section {
+  text-align: center;
+}
+
+.register-text {
+  color: #8b7355;
+  font-size: 0.85rem;
+  margin: 0 0 0.4rem 0;
+}
+
+.register-link {
+  color: #8b4513;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #654321;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .app-title {
+    font-size: 2rem;
+  }
+  
+  .features {
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .left-section {
+    padding: 1.5rem 1rem;
+    min-height: 40vh;
+  }
+
+  .app-title {
+    font-size: 1.8rem;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .features {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .feature-item {
+    flex: 0 1 auto;
+    font-size: 0.8rem;
+  }
+
+  .right-section {
+    padding: 1rem;
+    background: white;
+    min-height: 60vh;
+  }
+
+  .card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+    max-width: none;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-section {
+    padding: 1rem;
+    min-height: 35vh;
+  }
+
+  .right-section {
+    padding: 0.8rem;
+  }
+
+  .app-title {
+    font-size: 1.6rem;
+  }
+
+  .features {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .card {
+    padding: 1.2rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+  }
+
+  .login-form {
+    gap: 1rem;
+  }
+
+  .form-input {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .submit-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .alert {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .login-container {
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .left-section, .right-section {
+    padding: 1rem;
+  }
+  
+  .card {
+    padding: 1.2rem;
+  }
+  
+  .login-form {
+    gap: 1rem;
+  }
+  
+  .card-header {
+    margin-bottom: 1rem;
+  }
+}
